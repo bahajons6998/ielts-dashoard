@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import Router from "./utils/Router";
 import Navbar from "./pages/Navbar";
 
@@ -7,10 +7,10 @@ function App() {
   element.innerHTML = 'Hello World'
   document.body.appendChild(element)
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Navbar />
       <Router />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
