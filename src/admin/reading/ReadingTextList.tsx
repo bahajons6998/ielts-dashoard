@@ -1,7 +1,3 @@
-import { Column } from "primereact/column";
-import { DataTable } from "primereact/datatable";
-import { useNavigate } from "react-router-dom";
-
 interface PropsType {
     id?: string;
     title?: string;
@@ -16,7 +12,7 @@ interface PropsTypes {
 }
 
 const ReadingTextList = ({ readings, onedit, ondelete }: PropsTypes) => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const actionBodyTemplate = (rowData: PropsType) => {
         return (

@@ -1,6 +1,4 @@
 // IeltsList.tsx
-import { useState } from "react";
-import { Button } from "primereact/button";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import axios from "axios";
@@ -25,7 +23,7 @@ interface IeltsListProps {
 }
 
 const IeltsList = ({ tests, onEdit, onfetch }: IeltsListProps) => {
-	const [loading, setLoading] = useState(false);
+	// const [_loading, setLoading] = useState(false);
 	const navigate = useNavigate();
 
 	const handleDelete = async (id: number) => {
@@ -34,7 +32,7 @@ const IeltsList = ({ tests, onEdit, onfetch }: IeltsListProps) => {
 		}
 		const token = localStorage.getItem("token");
 		try {
-			setLoading(true);
+			// setLoading(true);
 			await axios.delete(`${base_url}/tests/${id}`, {
 				headers: { Authorization: `Bearer ${token}` },
 			});
@@ -44,7 +42,7 @@ const IeltsList = ({ tests, onEdit, onfetch }: IeltsListProps) => {
 			console.error("Error deleting IELTS:", error);
 			alert("Failed to delete IELTS");
 		} finally {
-			setLoading(false);
+			// setLoading(false);
 		}
 	};
 

@@ -1,4 +1,3 @@
-import { Dialog } from "primereact/dialog";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -46,27 +45,8 @@ interface UserListProps {
 }
 
 const UserList: React.FC<UserListProps> = ({ users, edit_user, delete_user, change_status }) => {
-	const [visible, setVisible] = React.useState(false);
-	const [selectedResults, setSelectedResults] = React.useState<UserResultType[] | null>(null);
 	const navigate=useNavigate()
-	const handleShowResults = (results?: UserResultType[]) => {
-		if (results && results.length > 0) {
-			setSelectedResults(results);
-			setVisible(true);
-		} else {
-			setSelectedResults(null);
-			setVisible(true);
-		}
-	};
-
-	function Edit_result(id: string) {
-		console.log(id);
-	}
-	function Delete_result(id: string) {
-		console.log(id);
-	}
-
-
+	
 
 	return (
 		<div>
@@ -130,72 +110,9 @@ const UserList: React.FC<UserListProps> = ({ users, edit_user, delete_user, chan
 					))}
 				</tbody>
 			</table>
-
-			{/* 🔹 Dialog modal */}
-			<Dialog
-				draggable={false}
-				header="User Results"
-				visible={visible}
-				style={{
-					width: "90vw",
-					border: "1px solid #a1a1a1",
-					padding: "20px",
-					backgroundColor: "#fff",
-				}}
-				onHide={() => setVisible(false)}
-			>
-				{selectedResults && selectedResults.length > 0 ? (
-					<table className="table table-bordered">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Listening</th>
-								<th>Reading</th>
-								<th>Speaking</th>
-								<th>Writing</th>
-								<th>Date</th>
-								<th>Feedback</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							{selectedResults.map((res, i) => (
-								<tr key={res.id}>
-									<td><b>{i + 1}</b></td>
-									<td>{res.listening_result}</td>
-									<td>{res.reading_result}</td>
-									<td>{res.speaking_result}</td>
-									<td>{res.writing_result}</td>
-									<td>{formatDate(res.updatedAt)}</td>
-									<td>{res.feedback}</td>
-									<td><button className="btn btn-sm btn-primary" onClick={() => Edit_result(res.id)}><i className="pi pi-pencil"></i></button>
-										<button className="btn btn-sm btn-danger mx-1" onClick={() => Delete_result(res.id)}><i className="pi pi-trash"></i></button>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-				) : (
-					<p>No results available</p>
-				)}
-			</Dialog>
 		</div>
 	);
 };
 
-
-
 export default UserList;
 
-function formatDate(dateString: string): string {
-	const date = new Date(dateString);
-
-	const day = String(date.getDate()).padStart(2, "0");
-	const month = String(date.getMonth() + 1).padStart(2, "0");
-	const year = date.getFullYear();
-
-	const hours = String(date.getHours()).padStart(2, "0");
-	const minutes = String(date.getMinutes()).padStart(2, "0");
-
-	return `${day}.${month}.${year} ${hours}:${minutes}`;
-}

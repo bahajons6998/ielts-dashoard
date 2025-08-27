@@ -1,27 +1,19 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 // pages
-import Home from "@/pages/Home";
-import About from "@/pages/About";
-import Contact from "@/pages/Contact";
-import NotFound from "@/pages/NotFound";
-
-// components
-// import Reading from "@/components/reading/Reading";
-// import Writing from "@/components/writing/Writing";
-// import Listening from "@/components/listening/Listening";
-// import Register from "@/components/auth/Register";
-// import Login from "@/components/auth/Login";
+import Home from '../pages/Home';
+import About from "../pages/About";
+import Contact from "../pages/Contact";
+import NotFound from "../pages/NotFound";
 
 // admin
-import IeltsContent from "@/admin/ielts/IeltsContent";
-import IeltsSingle from "@/admin/ielts/IeltsSingle";
-import Users from "@/admin/users/Users";
-import ReadingText from "@/admin/reading/ReadingText";
-import ListeningPart from "@/admin/listening/ListeningPart";
-import UserResult from "@/admin/users/UserResult";
-import UserWritingResult from "@/admin/users/UserWritingResult";
+import IeltsContent from "../admin/ielts/IeltsContent";
+import IeltsSingle from "../admin/ielts/IeltsSingle";
+import Users from "../admin/users/Users";
+import ReadingText from "../admin/reading/ReadingText";
+import ListeningPart from "../admin/listening/ListeningPart";
+import UserResult from "../admin/users/UserResult";
+import UserWritingResult from "../admin/users/UserWritingResult";
 
 function Router() {
 	return (

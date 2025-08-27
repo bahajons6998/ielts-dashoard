@@ -1,6 +1,3 @@
-
-import { Column } from "primereact/column";
-import { DataTable } from "primereact/datatable";
 import { useNavigate } from "react-router-dom";
 
 interface PropsType {

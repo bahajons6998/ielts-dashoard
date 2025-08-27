@@ -1,5 +1,3 @@
-// Writing.tsx
-import { useParams } from "react-router-dom";
 import Editor from "../../utils/CKeditor";
 import axios from "axios";
 import { base_url } from "../../utils/base_url";

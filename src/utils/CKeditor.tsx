@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
@@ -9,7 +8,7 @@ interface EditorProps {
 }
 
 const Editor = ({ value, onChange }: EditorProps) => {
-    const [data, setData] = useState<string>("");
+    // const [data, setData] = useState<string>("");
 
     return (
         <CKEditor
@@ -44,7 +43,7 @@ const Editor = ({ value, onChange }: EditorProps) => {
             style={{ heigh: '150px' }}
             onChange={(_: any, editor: any) => {
                 const newData = editor.getData();
-                setData(newData);
+                // setData(newData);
                 if (onChange) onChange(newData);
             }}
             onError={(error: any) => {
