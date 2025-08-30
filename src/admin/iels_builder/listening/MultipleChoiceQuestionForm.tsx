@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { IContent, IQuestion, IOption } from './ListeningTypes';
+import { IContent, IQuestion } from './ListeningTypes';
 import CKEditorWrapper from './CKEditorWrapper';
 
 interface MultipleChoiceQuestionFormProps {
@@ -9,7 +9,7 @@ interface MultipleChoiceQuestionFormProps {
 
 const MultipleChoiceQuestionForm: React.FC<MultipleChoiceQuestionFormProps> = ({ content, onUpdate }) => {
   const [multipleChoiceData, setMultipleChoiceData] = useState<IContent>(content);
-  
+
   // useEffect orqali onUpdate ni chaqirish - bu render jarayonida emas, render tugagandan keyin ishlaydi
   useEffect(() => {
     // Faqat zarur bo'lgan holatdagina update qilish
@@ -48,49 +48,49 @@ const MultipleChoiceQuestionForm: React.FC<MultipleChoiceQuestionFormProps> = ({
 
   const handleQuestionTextChange = useCallback((index: number, text: string) => {
     if (!multipleChoiceData.questions) return;
-    
+
     setMultipleChoiceData(prev => {
       if (!prev.questions) return prev;
-      
+
       const updatedQuestions = [...prev.questions];
       updatedQuestions[index] = {
         ...updatedQuestions[index],
         question: text
       };
-      
+
       return { ...prev, questions: updatedQuestions };
     });
   }, [multipleChoiceData.questions]);
 
   const handleOptionChange = useCallback((questionIndex: number, optionIndex: number, label: string) => {
     if (!multipleChoiceData.questions) return;
-    
+
     setMultipleChoiceData(prev => {
       if (!prev.questions) return prev;
-      
+
       const updatedQuestions = [...prev.questions];
       const updatedOptions = [...updatedQuestions[questionIndex].options];
-      
+
       updatedOptions[optionIndex] = {
         ...updatedOptions[optionIndex],
         label
       };
-      
+
       updatedQuestions[questionIndex] = {
         ...updatedQuestions[questionIndex],
         options: updatedOptions
       };
-      
+
       return { ...prev, questions: updatedQuestions };
     });
   }, [multipleChoiceData.questions]);
 
   const handleRemoveQuestion = useCallback((index: number) => {
     if (!multipleChoiceData.questions) return;
-    
+
     setMultipleChoiceData(prev => {
       if (!prev.questions) return prev;
-      
+
       return {
         ...prev,
         questions: prev.questions.filter((_, i) => i !== index)
@@ -100,14 +100,14 @@ const MultipleChoiceQuestionForm: React.FC<MultipleChoiceQuestionFormProps> = ({
 
   const handleAddOption = useCallback((questionIndex: number) => {
     if (!multipleChoiceData.questions) return;
-    
+
     setMultipleChoiceData(prev => {
       if (!prev.questions) return prev;
-      
+
       const updatedQuestions = [...prev.questions];
       const options = updatedQuestions[questionIndex].options;
       const newOptionValue = String.fromCharCode(65 + options.length); // A, B, C, D, etc.
-      
+
       updatedQuestions[questionIndex] = {
         ...updatedQuestions[questionIndex],
         options: [
@@ -115,61 +115,61 @@ const MultipleChoiceQuestionForm: React.FC<MultipleChoiceQuestionFormProps> = ({
           { id: `option-${newOptionValue}-${Date.now()}`, value: newOptionValue, label: '', isCorrect: false }
         ]
       };
-      
+
       return { ...prev, questions: updatedQuestions };
     });
   }, [multipleChoiceData.questions]);
 
   const handleRemoveOption = useCallback((questionIndex: number, optionIndex: number) => {
     if (!multipleChoiceData.questions) return;
-    
+
     setMultipleChoiceData(prev => {
       if (!prev.questions) return prev;
-      
+
       const updatedQuestions = [...prev.questions];
       const updatedOptions = updatedQuestions[questionIndex].options.filter((_, i) => i !== optionIndex);
-      
+
       // Variantlarni qayta raqamlash (A, B, C, etc.)
       const renumberedOptions = updatedOptions.map((opt, i) => ({
         ...opt,
         value: String.fromCharCode(65 + i) // A, B, C, D, etc.
       }));
-      
+
       updatedQuestions[questionIndex] = {
         ...updatedQuestions[questionIndex],
         options: renumberedOptions
       };
-      
+
       // Agar o'chirilgan option to'g'ri javob bo'lsa, to'g'ri javobni ham qayta ko'rib chiqish kerak
       if (updatedQuestions[questionIndex].correctAnswer === String.fromCharCode(65 + optionIndex)) {
         updatedQuestions[questionIndex].correctAnswer = '';
       }
-      
+
       return { ...prev, questions: updatedQuestions };
     });
   }, [multipleChoiceData.questions]);
 
   const handleCorrectAnswerChange = useCallback((questionIndex: number, optionValue: string) => {
     if (!multipleChoiceData.questions) return;
-    
+
     setMultipleChoiceData(prev => {
       if (!prev.questions) return prev;
-      
+
       const updatedQuestions = [...prev.questions];
       const currentQuestion = updatedQuestions[questionIndex];
-      
+
       // Oldingi to'g'ri javobni o'chirib, yangi to'g'ri javobni belgilash
       const updatedOptions = currentQuestion.options.map(opt => ({
         ...opt,
         isCorrect: opt.value === optionValue
       }));
-      
+
       updatedQuestions[questionIndex] = {
         ...currentQuestion,
         correctAnswer: optionValue,
         options: updatedOptions
       };
-      
+
       return { ...prev, questions: updatedQuestions };
     });
   }, [multipleChoiceData.questions]);
@@ -185,7 +185,7 @@ const MultipleChoiceQuestionForm: React.FC<MultipleChoiceQuestionFormProps> = ({
           placeholder="Ko'p tanlovli savol uchun ko'rsatmalarni kiriting..."
         />
       </div>
-      
+
       <div className="questions-section">
         <h5>Questions</h5>
         {multipleChoiceData.questions?.map((question, qIndex) => (
@@ -198,7 +198,7 @@ const MultipleChoiceQuestionForm: React.FC<MultipleChoiceQuestionFormProps> = ({
                 onChange={(e) => handleQuestionTextChange(qIndex, e.target.value)}
               />
             </div>
-            
+
             <div className="options-container">
               <h6>Options</h6>
               {question.options.map((option, oIndex) => (
@@ -229,7 +229,7 @@ const MultipleChoiceQuestionForm: React.FC<MultipleChoiceQuestionFormProps> = ({
                   </button>
                 </div>
               ))}
-              
+
               <button
                 type="button"
                 className="add-option-btn"
@@ -238,7 +238,7 @@ const MultipleChoiceQuestionForm: React.FC<MultipleChoiceQuestionFormProps> = ({
                 Add Option
               </button>
             </div>
-            
+
             <button
               type="button"
               className="remove-question-btn"
@@ -248,7 +248,7 @@ const MultipleChoiceQuestionForm: React.FC<MultipleChoiceQuestionFormProps> = ({
             </button>
           </div>
         ))}
-        
+
         <button
           type="button"
           className="add-question-btn"
