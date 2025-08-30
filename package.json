@@ -27,6 +27,7 @@
     "react-router-dom": "^7.6.3",
     "sass": "^1.89.2",
     "tailwindcss": "^4.1.11",
+    "uuid": "^11.1.0",
     "zod": "^4.0.10"
   },
   "devDependencies": {

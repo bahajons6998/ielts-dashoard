@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 import NotFound from "../pages/NotFound";
+import ListeningBuilderExample from "../pages/ListeningBuilderExample";
 
 // admin
 import IeltsContent from "../admin/ielts/IeltsContent";
@@ -14,6 +15,8 @@ import ReadingText from "../admin/reading/ReadingText";
 import ListeningPart from "../admin/listening/ListeningPart";
 import UserResult from "../admin/users/UserResult";
 import UserWritingResult from "../admin/users/UserWritingResult";
+import { ReadingTestForm } from "../admin/iels_builder/reading/ReadingTestForm";
+// import IeltsZoneListeningUI from "../admin/iels_builder/listening/ieltszoneListeningUI";
 
 function Router() {
 	return (
@@ -22,6 +25,9 @@ function Router() {
 			<Route path="/" element={<Home />} />
 			<Route path="/about" element={<About />} />
 			<Route path="/contact" element={<Contact />} />
+			<Route path="/reading-test" element={<ReadingTestForm />} />
+			<Route path="/listening-builder" element={<ListeningBuilderExample />} />
+			{/* <Route path="/listening" element={<IeltsZoneListeningUI />} /> */}
 
 			{/* auth */}
 			{/* <Route path="/api/login" element={<Login />} />

@@ -50,6 +50,13 @@ export default function Navbar() {
               Listening
             </Link>
           </li>
+          <li>
+            <Link to={"/listening-builder"}
+              style={{ textDecoration: "none", color: "#000" }}
+            >
+              Listening Builder
+            </Link>
+          </li>
         </ul>
       </div>
       <div>

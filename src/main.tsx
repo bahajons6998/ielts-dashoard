@@ -14,8 +14,9 @@ import 'primeicons/primeicons.css';
 
 // 5. O‘z CSS’ingiz (agar bo‘lsa)
 import './index.css';
-createRoot(document.getElementById('root')!).render(
-  <>
-    <App />
-  </>,
+
+const root = createRoot(document.getElementById('root')!)
+root.render(
+  <App />
+
 )
